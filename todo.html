@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todo">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+    <title>Shopping Todo</title>
+</head>
+<body>
+    <div class="container">
+        <div>&nbsp</div>
+        <div ng-controller="todoCtrl">
+            <table class="col-lg-12 table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="grey">
+                            <h2 class="col-lg-3">Shopping List</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <tr ng-repeat="todo in todos | orderBy: 'item'">
+                                    <td class="tableData">
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td><a href="#itemModal" ng-click="showItem(todo)" data-toggle="modal" data-target="#myModal">{{todo.item}}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </tr>
+                    <tr>
+                        <td width="70">
+                            <a href="" data-toggle="modal" data-target="#itemModal"><h4>+ add a new item in the list</h4></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myItemLabel">Add a new item</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" ng-submit="addTodo()">
+                                <div class="form-group">
+                                    <label for="iname">Item name</label>
+                                    <input class="form-control" id="iname" ng-model="todoItem" placeholder="Enter item name here" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Item Description</label>
+                                    <input class="form-control" id="description" ng-model="todoDesc" placeholder="item description" required/>
+                                </div>
+                                    <button type="submit" class="btn btn-primary">Add Item to list</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{selectedTodo.item}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{selectedTodo.desc}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/jquerry.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script  src="js/bootstrap.min.js"></script>
+    <script src="controllers/todoCtrl.js"></script>
+
+</body>
+</html>
